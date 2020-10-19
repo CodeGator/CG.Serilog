@@ -1,9 +1,9 @@
 # CG.Serilog: 
 ---
-[![Build Status](https://dev.azure.com/codegator/CG.Serilog/_apis/build/status/CodeGator.CG.Serilog?branchName=master)](https://dev.azure.com/codegator/CG.Serilog/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/codegator/CG.Serilog/_apis/build/status/CodeGator.CG.Serilog?branchName=master)](https://dev.azure.com/codegator/CG.Serilog/_build/latest?definitionId=19&branchName=master)
 [![Github docs](https://img.shields.io/static/v1?label=Documentation&message=online&color=blue)](https://codegator.github.io/CG.Serilog/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/CG.Serilog.svg?style=flat)](https://nuget.org/packages/CG.Serilog)
-![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/codegator/CG.Serilog/1)
+![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/codegator/CG.Serilog/19)
 
 #### What does it do?
 The package contains Serilog integration logic used by other CodeGator packages.
