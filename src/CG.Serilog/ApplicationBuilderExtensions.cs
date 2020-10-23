@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Serilog;
 
-namespace CG.Serilog
+namespace Microsoft.Extensions.Hosting
 {
     /// <summary>
     /// This class contains extension methods related to the <see cref="IApplicationBuilder/>
