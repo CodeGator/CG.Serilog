@@ -5,7 +5,7 @@ using Serilog;
 namespace Microsoft.Extensions.Hosting
 {
     /// <summary>
-    /// This class contains extension methods related to the <see cref="IApplicationBuilder/>
+    /// This class contains extension methods related to the <see cref="IApplicationBuilder"/>
     /// types.
     /// </summary>
     public static partial class ApplicationBuilderExtensions
@@ -17,13 +17,14 @@ namespace Microsoft.Extensions.Hosting
         #region Public methods
 
         /// <summary>
-        /// This method adds standard middleware for serilog logging.
+        /// This method adds standard middleware for logging requests through
+        /// the serilog library.
         /// </summary>
         /// <param name="applicationBuilder">The application builder to use 
         /// for the operation.</param>
         /// <returns>The value of the <paramref name="applicationBuilder"/>
         /// parameter, for chaining calls together.</returns>
-        public static IApplicationBuilder UseSerilog(
+        public static IApplicationBuilder UseSerilogRequestLogging(
             this IApplicationBuilder applicationBuilder
             )
         {
@@ -31,7 +32,7 @@ namespace Microsoft.Extensions.Hosting
             Guard.Instance().ThrowIfNull(applicationBuilder, nameof(applicationBuilder));
 
             // Use serilog.
-            applicationBuilder.UseSerilogRequestLogging();
+            SerilogApplicationBuilderExtensions.UseSerilogRequestLogging(applicationBuilder);
 
             // Return the builder.
             return applicationBuilder;

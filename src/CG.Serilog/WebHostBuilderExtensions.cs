@@ -30,7 +30,7 @@ namespace Microsoft.AspNetCore.Hosting
             Guard.Instance().ThrowIfNull(webHostBuilder, nameof(webHostBuilder));
 
             // Use serilog.
-            webHostBuilder.UseSerilog();
+            SerilogWebHostBuilderExtensions.UseSerilog(webHostBuilder);
 
             // Return the builder.
             return webHostBuilder;
