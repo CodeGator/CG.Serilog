@@ -1,10 +1,14 @@
 ﻿using CG;
+using CG.Diagnostics;
 using CG.Validations;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Exceptions;
+using Serilog.Formatting.Compact;
+using Serilog.Sinks.SystemConsole.Themes;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Microsoft.Extensions.Hosting
 {
@@ -34,17 +38,48 @@ namespace Microsoft.Extensions.Hosting
             // Validate the parameters before attempting to use them.
             Guard.Instance().ThrowIfNull(hostBuilder, nameof(hostBuilder));
 
-            // Add our standard serilog configuration.
+            // Setup Serilog.
             hostBuilder.UseSerilog((hostingContext, loggerConfiguration) => {
-                 loggerConfiguration.ReadFrom.Configuration(
-                     hostingContext.Configuration
-                     )
-                     .Enrich.WithExceptionDetails()
-                     .Enrich.FromLogContext()
-                     .Enrich.WithProperty("ApplicationName", AppDomain.CurrentDomain.FriendlyNameEx(true))
-                     .Enrich.WithProperty("Environment", hostingContext.HostingEnvironment);
+
+                // Get the application's friendly name.
+                var friendlyName = AppDomain.CurrentDomain.FriendlyNameEx(true);
+
+                // How should we setup Serilog?
+                if (hostingContext.Configuration.GetSection("Serilog").GetChildren().Any())
+                {
+                    // If we get here, there is a populated 'Serilog' section in 
+                    //   the configuration to read from.
+
+                    // Setup serilog from the configuration.
+                    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
+                        .Enrich.WithExceptionDetails()
+                        .Enrich.FromLogContext()
+                        .Enrich.WithProperty("ApplicationName", friendlyName)
+                        .Enrich.WithProperty("MachineName", Environment.MachineName)
+                        .Enrich.WithProperty("Environment", hostingContext.HostingEnvironment);
+                }
+                else
+                {
+                    // If we get here, there is no 'Serilog' section in the 
+                    //   configuration to read from.
+
+                    // Setup serilog with defaults.
+                    loggerConfiguration
+                        .Enrich.WithExceptionDetails()
+                        .Enrich.FromLogContext()
+                        .Enrich.WithProperty("ApplicationName", friendlyName)
+                        .Enrich.WithProperty("MachineName", Environment.MachineName)
+                        .Enrich.WithProperty("Environment", hostingContext.HostingEnvironment)
+                        .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+                        .WriteTo.File(
+                            formatter: new RenderedCompactJsonFormatter(),
+                            path: $"{friendlyName}-.log",
+                            rollingInterval: RollingInterval.Day,
+                            rollOnFileSizeLimit: true
+                            );
+                }
 #if DEBUG
-                 loggerConfiguration.Enrich.WithProperty("DebuggerAttached", Debugger.IsAttached);
+                loggerConfiguration.Enrich.WithProperty("DebuggerAttached", Debugger.IsAttached);
 #endif
              });
 
@@ -72,7 +107,7 @@ namespace Microsoft.Extensions.Hosting
             Guard.Instance().ThrowIfNull(hostBuilder, nameof(hostBuilder))
                 .ThrowIfNullOrEmpty(sectionName, nameof(sectionName));
 
-            // Add our standard serilog configuration.
+            // Minimal Serilog configuration.
             hostBuilder.UseSerilog((hostingContext, loggerConfiguration) => {
                 loggerConfiguration.ReadFrom.Configuration(
                     hostingContext.Configuration.GetSection(sectionName)
@@ -80,7 +115,8 @@ namespace Microsoft.Extensions.Hosting
                     .Enrich.WithExceptionDetails()
                     .Enrich.FromLogContext()
                     .Enrich.WithProperty("ApplicationName", AppDomain.CurrentDomain.FriendlyNameEx(true))
-                    .Enrich.WithProperty("Environment", hostingContext.HostingEnvironment);
+                    .Enrich.WithProperty("Environment", hostingContext.HostingEnvironment)
+                    .WriteTo.Console();
 #if DEBUG
                 loggerConfiguration.Enrich.WithProperty("DebuggerAttached", Debugger.IsAttached);
 #endif
