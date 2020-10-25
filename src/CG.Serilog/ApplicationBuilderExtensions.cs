@@ -1,6 +1,7 @@
 ﻿using CG.Validations;
 using Microsoft.AspNetCore.Builder;
 using Serilog;
+using System;
 
 namespace Microsoft.Extensions.Hosting
 {
@@ -24,6 +25,8 @@ namespace Microsoft.Extensions.Hosting
         /// for the operation.</param>
         /// <returns>The value of the <paramref name="applicationBuilder"/>
         /// parameter, for chaining calls together.</returns>
+        /// <exception cref="ArgumentException">This exception is thrown whenever
+        /// one or more of the required parameters is missing or invalid.</exception>
         public static IApplicationBuilder UseSerilogRequestLogging(
             this IApplicationBuilder applicationBuilder
             )

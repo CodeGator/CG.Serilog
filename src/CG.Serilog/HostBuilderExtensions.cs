@@ -1,7 +1,5 @@
 ﻿using CG;
-using CG.Diagnostics;
 using CG.Validations;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Formatting.Compact;
@@ -31,6 +29,43 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The host builder to use for the operation.</param>
         /// <returns>The value of the <paramref name="hostBuilder"/> parameter, 
         /// for chaining calls together.</returns>
+        /// <exception cref="ArgumentException">This exception is thrown whenever
+        /// one or more of the required parameters is missing or invalid.</exception>
+        /// <remarks>
+        /// <para>
+        /// For our purposes, a 'standard' Serilog configuration is: 
+        /// <list type="bullet">
+        /// <item><description>Enriched with exception details.</description></item>
+        /// <item><description>Enriched from the log context.</description></item>
+        /// <item><description>Encriched with the application name.</description></item>
+        /// <item><description>Encriched with the machine name.</description></item>
+        /// <item><description>Encriched with whether there is a debugger attached.</description></item>
+        /// <item><description>Enriched with the Environment name.</description></item>
+        /// <item><description>Console logger with <c>AnsiConsoleTheme.Code</c> theme.</description></item>
+        /// <item><description>File logger with compact JSON formatter, rolling daily.</description></item>
+        /// </list>
+        /// </para>
+        /// <para>
+        /// If you specify a 'Serilog' section in your configuration, then you can, of course,
+        /// choose whatever you like for a 'standard' configuration.
+        /// </para>
+        /// </remarks>
+        /// <example>
+        /// This example demostrates a typical use of the <see cref="AddSerilog(IHostBuilder)"/>
+        /// method:
+        /// <code>
+        /// static void Main(string[] args)
+        /// {
+        ///     var host = Host.CreateDefaultBuilder()
+        ///                    .ConfigureWebHost(hostBuilder =>
+        ///                    {
+        ///                        hostBuilder.UseSerilog(); // This call is also required.
+        ///                    })
+        ///                    .AddSerilog()
+        ///                    .Build();
+        /// }
+        /// </code>
+        /// </example>
         public static IHostBuilder AddSerilog(
             this IHostBuilder hostBuilder
             )
@@ -98,6 +133,30 @@ namespace Microsoft.Extensions.Hosting
         /// operation.</param>
         /// <returns>The value of the <paramref name="hostBuilder"/> parameter, 
         /// for chaining calls together.</returns>
+        /// <exception cref="ArgumentException">This exception is thrown whenever
+        /// one or more of the required parameters is missing or invalid.</exception>
+        /// <remarks>
+        /// <para>
+        /// If you specify a 'Serilog' section in your configuration, then of course,
+        /// you can choose whatever you like for a 'standard' configuration.
+        /// </para>
+        /// </remarks>
+        /// <example>
+        /// This example demostrates a typical use of the <see cref="AddSerilog(IHostBuilder)"/>
+        /// method:
+        /// <code>
+        /// static void Main(string[] args)
+        /// {
+        ///     var host = Host.CreateDefaultBuilder()
+        ///                    .ConfigureWebHost(hostBuilder =>
+        ///                    {
+        ///                        hostBuilder.UseSerilog(); // This call is also required.
+        ///                    })
+        ///                    .AddSerilog("MySerilogSection")
+        ///                    .Build();
+        /// }
+        /// </code>
+        /// </example>
         public static IHostBuilder AddSerilog(
             this IHostBuilder hostBuilder,
             string sectionName

@@ -1,5 +1,6 @@
 ﻿using CG.Validations;
 using Serilog;
+using System;
 
 namespace Microsoft.AspNetCore.Hosting
 {
@@ -22,6 +23,8 @@ namespace Microsoft.AspNetCore.Hosting
         /// for the operation.</param>
         /// <returns>The value of the <paramref name="webHostBuilder"/>
         /// parameter, for chaining calls together.</returns>
+        /// <exception cref="ArgumentException">This exception is thrown whenever
+        /// one or more of the required parameters is missing or invalid.</exception>
         public static IWebHostBuilder UseSerilog(
             this IWebHostBuilder webHostBuilder
             )
