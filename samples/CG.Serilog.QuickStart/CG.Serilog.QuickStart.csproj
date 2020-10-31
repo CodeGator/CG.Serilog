@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CG.Hosting" Version="2020.5.1" />
+    <PackageReference Include="CG.Hosting" Version="2020.5.7" />
   </ItemGroup>
 
   <ItemGroup>

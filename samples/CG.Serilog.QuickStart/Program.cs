@@ -11,10 +11,6 @@ namespace CG.Serilog.QuickStart
         static void Main(string[] args)
         {
             var host = Host.CreateDefaultBuilder()
-                .ConfigureWebHost(hostBuilder =>
-                {
-                    hostBuilder.UseSerilog(); // This call is required.
-                })
                 .AddSerilog() // This call is required.
                 .Build();
 
@@ -24,11 +20,13 @@ namespace CG.Serilog.QuickStart
             {
                 // Let's verfiy that we actually registered Serilog ...
                 var logger = h.Services.GetRequiredService<ILogger<Program>>();
+                logger.LogTrace("trace through serilog.");
+                logger.LogDebug("debug through serilog.");
                 logger.LogInformation("information through serilog.");
                 logger.LogWarning("warning through serilog.");
                 logger.LogError("error through serilog.");
+                logger.LogCritical("critical through serilog.");
 
-                // Yay, it worked.
                 Console.WriteLine();
                 Console.WriteLine("press any key to exit.");
                 Console.ReadKey();
