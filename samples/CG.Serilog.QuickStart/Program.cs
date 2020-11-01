@@ -11,6 +11,9 @@ namespace CG.Serilog.QuickStart
         static void Main(string[] args)
         {
             var host = Host.CreateDefaultBuilder()
+                .ConfigureWebHost(webHostBuilder=> {
+                    webHostBuilder.UseSerilog(); // If this was a web app.
+                })
                 .AddSerilog() // This call is required.
                 .Build();
 

@@ -106,7 +106,7 @@ namespace Microsoft.Extensions.Hosting
 
                 // Get the configuration section from the standard location.
                 var section = hostingContext.Configuration.GetSection(
-                    "Services:Logging:Serilog"
+                    "Services:Logging"  // <-- traling ':Serilog' is added by serilog libs
                     );
 
                 // How should we setup Serilog?
@@ -117,7 +117,7 @@ namespace Microsoft.Extensions.Hosting
 
                     // Setup serilog from the configuration.
                     loggerConfiguration.ReadFrom.Configuration(
-                        hostingContext.Configuration
+                        section
                         );
                 }
                 else
