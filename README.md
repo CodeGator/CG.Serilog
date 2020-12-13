@@ -4,12 +4,12 @@
 [![Github docs](https://img.shields.io/static/v1?label=Documentation&message=online&color=blue)](https://codegator.github.io/CG.Serilog/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/CG.Serilog.svg?style=flat)](https://nuget.org/packages/CG.Serilog)
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/codegator/CG.Serilog/19)
+[![Github discussion](https://img.shields.io/badge/Discussion-online-blue)](https://github.com/CodeGator/CG.Serilog/discussions)
 
 #### What does it do?
 The package contains Serilog integration logic used by other CodeGator packages.
 
 #### What platform(s) does it support?
-* .NET 4.61x or above
 * .NET Standard 2.x or higher
 
 #### How do I install it?
