@@ -7,9 +7,10 @@
 
 * I removed the .net 4.61 build target
 
+* I switched the build target to .net core 3.1
+
 ## 2020.1
 
 * I pulled the code from CG.Core.
-
 
 

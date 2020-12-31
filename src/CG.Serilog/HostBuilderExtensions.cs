@@ -31,66 +31,6 @@ namespace Microsoft.Extensions.Hosting
         /// for chaining calls together.</returns>
         /// <exception cref="ArgumentException">This exception is thrown whenever
         /// one or more of the required parameters is missing or invalid.</exception>
-        /// <remarks>
-        /// <remarks>
-        /// <para>
-        /// The idea with this method, is to create a quick and easy way to setup 
-        /// logging services for a hosted application by following a simple configuration 
-        /// convention. That convention assumes a configuration section exists like this:
-        /// <code language="json">
-        /// {
-        ///    "Services" : {
-        ///       "Logging": {
-        ///          "Strategy" : "Serilog",
-        ///          "Assembly" : "",
-        ///          "Serilog": {
-        ///             "Using": [ "Serilog.Sinks.Console" ],
-        ///             "MinimumLevel": "Information",
-        ///             "WriteTo": [{
-        ///                "Name": "Console",
-        ///                "Args": { "theme": "Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme::Code, Serilog.Sinks.Console" }
-        ///             }]
-        ///          }
-        ///       }
-        ///    }
-        /// }
-        /// </code>
-        /// </para>
-        /// <para>
-        /// Let's break it down. The <c>Services</c> section is where ALL services for the 
-        /// application should be configured. If you're adding a CodeGator service to your
-        /// application then you'll want to add that service to this section in order to 
-        /// configure the service at startup.
-        /// </para>
-        /// <para>
-        /// Under <c>Services</c>, the <c>Logging</c> section is where the CodeGator logging service 
-        /// should be configured. This section contains at least two nodes: <c>Strategy</c> and 
-        /// <c>Assembly</c>. The <c>Strategy</c> node tells the host what strategy to load
-        /// for the logging service, and as such, is required. The <c>Assembly</c> section is 
-        /// optional, and is only needed when the strategy is located in an external assembly 
-        /// that should be dynamically loaded at startup.
-        /// </para>
-        /// <para>
-        /// The <c>Serilog</c> section is an example of a strategy section. This will vary, of
-        /// course, depending on which strategy is named in the <c>Strategy</c> node. In this
-        /// case, we see a made up example for a Serilog based logging strategy. One thing to 
-        /// note is, the actual content of the <c>Serilog</c> strategy is determined by the 
-        /// Serilog library, not by this library. All we do here is route the appropriate configuration
-        /// section to the Serilog library at startup.
-        /// </para>
-        /// </remarks>
-        /// <example>
-        /// This example demostrates a typical use of the <see cref="AddSerilog(IHostBuilder)"/>
-        /// method:
-        /// <code>
-        /// static void Main(string[] args)
-        /// {
-        ///     var host = Host.CreateDefaultBuilder()
-        ///                    .AddSerilog()
-        ///                    .Build();
-        /// }
-        /// </code>
-        /// </example>
         public static IHostBuilder AddSerilog(
             this IHostBuilder hostBuilder
             )
