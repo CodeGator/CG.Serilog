@@ -12,9 +12,10 @@ namespace CG.Serilog.QuickStart
         {
             var host = Host.CreateDefaultBuilder()
                 .ConfigureWebHost(webHostBuilder=> {
-                    webHostBuilder.UseSerilog(); // If this was a web app.
+                    webHostBuilder.UseStartup<Startup>(); // If this was a ASP.NET app.
+                    //webHostBuilder.UseStandardSerilog(); // If this was a web app.
                 })
-                .AddSerilog() // This call is required.
+                //.AddStandardSerilog() // If this is a console app.
                 .Build();
 
             // That's it! The host should now have a registered Serilog logger.

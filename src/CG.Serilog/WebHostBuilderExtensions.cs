@@ -25,7 +25,7 @@ namespace Microsoft.AspNetCore.Hosting
         /// parameter, for chaining calls together.</returns>
         /// <exception cref="ArgumentException">This exception is thrown whenever
         /// one or more of the required parameters is missing or invalid.</exception>
-        public static IWebHostBuilder UseSerilog(
+        public static IWebHostBuilder UseStandardSerilog(
             this IWebHostBuilder webHostBuilder
             )
         {

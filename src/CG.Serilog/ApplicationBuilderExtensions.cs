@@ -1,6 +1,8 @@
 ﻿using CG.Validations;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Serilog;
+using Serilog.AspNetCore;
 using System;
 
 namespace Microsoft.Extensions.Hosting
@@ -27,7 +29,7 @@ namespace Microsoft.Extensions.Hosting
         /// parameter, for chaining calls together.</returns>
         /// <exception cref="ArgumentException">This exception is thrown whenever
         /// one or more of the required parameters is missing or invalid.</exception>
-        public static IApplicationBuilder UseSerilogRequestLogging(
+        public static IApplicationBuilder UseStandardSerilogRequestLogging(
             this IApplicationBuilder applicationBuilder
             )
         {
@@ -36,6 +38,37 @@ namespace Microsoft.Extensions.Hosting
 
             // Use serilog.
             SerilogApplicationBuilderExtensions.UseSerilogRequestLogging(applicationBuilder);
+
+            // Return the builder.
+            return applicationBuilder;
+        }
+
+        // *******************************************************************
+
+        /// <summary>
+        /// This method wires up any logic required for the standard Serilog logging
+        /// environment.
+        /// </summary>
+        /// <param name="applicationBuilder">The application builder to use 
+        /// for the operation.</param>
+        /// <param name="hostEnvironment">The host environment to use for the 
+        /// operation.</param>
+        /// <returns>The value of the <paramref name="applicationBuilder"/>
+        /// parameter, for chaining calls together.</returns>
+        /// <exception cref="ArgumentException">This exception is thrown whenever
+        /// one or more of the required parameters is missing or invalid.</exception>
+        public static IApplicationBuilder UseStandardSerilog(
+            this IApplicationBuilder applicationBuilder,
+            IWebHostEnvironment hostEnvironment
+            )
+        {
+            // Validate the parameters before attempting to use them.
+            Guard.Instance().ThrowIfNull(applicationBuilder, nameof(applicationBuilder))
+                .ThrowIfNull(hostEnvironment, nameof(hostEnvironment));
+
+            // Tie into the ASP.NET startup logic.
+            var webHostBuilder = new WebHostBuilder();
+            webHostBuilder.UseSerilog();
 
             // Return the builder.
             return applicationBuilder;

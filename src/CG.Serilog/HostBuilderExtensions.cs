@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.Hosting
         /// for chaining calls together.</returns>
         /// <exception cref="ArgumentException">This exception is thrown whenever
         /// one or more of the required parameters is missing or invalid.</exception>
-        public static IHostBuilder AddSerilog(
+        public static IHostBuilder AddStandardSerilog(
             this IHostBuilder hostBuilder
             )
         {
@@ -46,7 +46,7 @@ namespace Microsoft.Extensions.Hosting
 
                 // Get the configuration section from the standard location.
                 var section = hostingContext.Configuration.GetSection(
-                    "Services:Logging"  // <-- traling ':Serilog' is added by serilog libs
+                    "Services:Logging"  // <-- trailing ':Serilog' is added by serilog libs
                     );
 
                 // How should we setup Serilog?
