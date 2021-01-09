@@ -22,9 +22,9 @@ namespace CG.Serilog.QuickStart
             IServiceCollection services
             )
         {
-            services.AddLogging(
-                Configuration.GetSection("Services:Logging")
-                );
+            //services.AddLogging(
+            //    Configuration.GetSection("Services:Logging")
+            //    );
         }
 
         public void Configure(
@@ -32,7 +32,7 @@ namespace CG.Serilog.QuickStart
             IWebHostEnvironment env
             )
         {
-            app.UseStandardSerilog(env);
+            //app.UseStandardSerilog(env);
         }
     }
 }

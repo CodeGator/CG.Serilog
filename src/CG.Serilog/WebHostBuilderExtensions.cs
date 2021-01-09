@@ -31,9 +31,8 @@ namespace Microsoft.AspNetCore.Hosting
         {
             // Validate the parameters before attempting to use them.
             Guard.Instance().ThrowIfNull(webHostBuilder, nameof(webHostBuilder));
-
-            // Use serilog.
-            SerilogWebHostBuilderExtensions.UseSerilog(webHostBuilder);
+            
+            // Nothing to do here.
 
             // Return the builder.
             return webHostBuilder;
