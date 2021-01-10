@@ -26,17 +26,19 @@ namespace CG.Serilog
         #region Public methods
 
         /// <summary>
-        /// This method adds a standard serilog based logging service to the
-        /// specified service collection.
+        /// This method adds standard serilog based logging strategies to the
+        /// logging service.
         /// </summary>
         /// <param name="serviceCollection">The service collection to use for 
         /// the operation.</param>
+        /// <param name="serviceLifetime">The service lifetime to use for the operation.</param>
         /// <param name="configuration">The configuration to use for the operation.</param>
         /// <returns>The value of the <paramref name="serviceCollection"/>
         /// parameter, for chaining calls together.</returns>
-        public static IServiceCollection AddStandardSerilog(
+        public static IServiceCollection AddSerilogStrategies(
             this IServiceCollection serviceCollection,
-            IConfiguration configuration
+            IConfiguration configuration,
+            ServiceLifetime serviceLifetime = ServiceLifetime.Scoped
             )
         {
             // Validate the parameters before attempting to use them.
@@ -87,7 +89,7 @@ namespace CG.Serilog
             loggerConfiguration.Enrich.WithProperty("DebuggerAttached", Debugger.IsAttached);
 #endif
 
-            // Set the configured logger, for Serilog.
+            // Set the static Serilog ligger instance, from the configuration.
             Log.Logger = loggerConfiguration.CreateLogger();
 
             // Return the service collection.

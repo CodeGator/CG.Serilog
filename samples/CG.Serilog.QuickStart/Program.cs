@@ -11,10 +11,10 @@ namespace CG.Serilog.QuickStart
         static void Main(string[] args)
         {
             var host = Host.CreateDefaultBuilder()
-                .AddStandardSerilog()
+                //.AddStandardSerilog()
                 .ConfigureWebHost(webHostBuilder=> {
                     webHostBuilder.UseStartup<Startup>();
-                    webHostBuilder.UseStandardSerilog();
+                    //webHostBuilder.UseStandardSerilog();
                 })
                 .Build();
 

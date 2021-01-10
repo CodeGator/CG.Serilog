@@ -30,6 +30,7 @@ Platforms supported:
 
   <ItemGroup>
     <PackageReference Include="CG.Core" Version="2021.1.1" />
+    <PackageReference Include="CG.Logging" Version="2021.1.2" />
     <PackageReference Include="CG.Options" Version="2021.1.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
