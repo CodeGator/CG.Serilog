@@ -39,7 +39,8 @@ namespace Microsoft.Extensions.Hosting
             Guard.Instance().ThrowIfNull(hostBuilder, nameof(hostBuilder));
 
             // Setup Serilog.
-            hostBuilder.UseSerilog((hostingContext, loggerConfiguration) => {
+            hostBuilder.UseSerilog((hostingContext, loggerConfiguration) =>
+            {
 
                 // Get the application's friendly name.
                 var friendlyName = AppDomain.CurrentDomain.FriendlyNameEx(true);
@@ -87,7 +88,7 @@ namespace Microsoft.Extensions.Hosting
 #if DEBUG
                 loggerConfiguration.Enrich.WithProperty("DebuggerAttached", Debugger.IsAttached);
 #endif
-             });
+            });
 
             // Return the builder.
             return hostBuilder;

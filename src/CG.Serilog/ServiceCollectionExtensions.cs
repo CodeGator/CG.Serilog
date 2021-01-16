@@ -1,8 +1,12 @@
-﻿using CG.Validations;
+﻿using CG.Configuration;
+using CG.Diagnostics;
+using CG.Validations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Exceptions;
+using Serilog.Extensions.Logging;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.SystemConsole.Themes;
 using System;
@@ -51,6 +55,18 @@ namespace CG.Serilog
             // Create a logger configuration, for Serilog.
             var loggerConfiguration = new LoggerConfiguration();
 
+            // Are we already pointed at the Serilog section?
+            if (configuration.GetPath().EndsWith("Serilog"))
+            {
+                // If we get here then we have to back up a level because the
+                //   Serilog method we'll use, to read the configuration section
+                //   from, wants to move down, internally, into a 'Serilog' section,
+                //   before it reads the configuration values. 
+
+                // Get the parent section.
+                configuration = configuration.GetParentSection();
+            }
+
             // How should we setup Serilog?
             if (configuration.GetChildren().Any())
             {
@@ -88,9 +104,37 @@ namespace CG.Serilog
 #if DEBUG
             loggerConfiguration.Enrich.WithProperty("DebuggerAttached", Debugger.IsAttached);
 #endif
+            // Register the logger configuration.
+            serviceCollection.AddSingleton(loggerConfiguration);
 
-            // Set the static Serilog ligger instance, from the configuration.
+            // Register a logger factory.
+            serviceCollection.AddSingleton<ILoggerFactory>(services =>
+            {
+                // Get the logger configuration.
+                var loggerConfiguration = services.GetRequiredService<LoggerConfiguration>();
+
+                // Write our configuration out as providers.
+                var providerCollection = new LoggerProviderCollection();
+                loggerConfiguration.WriteTo.Providers(
+                    providerCollection
+                    );
+
+                // Create the logger factory.
+                var factory = new SerilogLoggerFactory(
+                    null,
+                    true,
+                    providerCollection
+                    );
+
+                // Return the logger factory.
+                return factory;
+            });
+
+            // Create the static Serilog logger instance.
             Log.Logger = loggerConfiguration.CreateLogger();
+
+            // Register the logger instance.
+            serviceCollection.AddSingleton(Log.Logger);
 
             // Return the service collection.
             return serviceCollection;
