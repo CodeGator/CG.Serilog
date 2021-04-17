@@ -1,20 +1,15 @@
 ﻿using CG.Validations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.AspNetCore;
-using Serilog.Extensions.Logging;
 using System;
 
 namespace Microsoft.Extensions.Hosting
 {
     /// <summary>
     /// This class contains extension methods related to the <see cref="IApplicationBuilder"/>
-    /// types.
+    /// types, for registering types related to serilog
     /// </summary>
-    public static partial class ApplicationBuilderExtensions
+    public static partial class SerilogApplicationBuilderExtensions
     {
         // *******************************************************************
         // Public methods.
@@ -40,7 +35,7 @@ namespace Microsoft.Extensions.Hosting
             Guard.Instance().ThrowIfNull(applicationBuilder, nameof(applicationBuilder));
 
             // Use serilog.
-            SerilogApplicationBuilderExtensions.UseSerilogRequestLogging(applicationBuilder);
+            Serilog.SerilogApplicationBuilderExtensions.UseSerilogRequestLogging(applicationBuilder);
 
             // Return the builder.
             return applicationBuilder;
@@ -72,6 +67,7 @@ namespace Microsoft.Extensions.Hosting
             Guard.Instance().ThrowIfNull(applicationBuilder, nameof(applicationBuilder))
                 .ThrowIfNull(hostEnvironment, nameof(hostEnvironment));
 
+            //NOTE : nothing to do, yet.
 
             // Return the builder.
             return applicationBuilder;

@@ -1,6 +1,4 @@
-﻿using CG.Configuration;
-using CG.Diagnostics;
-using CG.Validations;
+﻿using CG.Validations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -10,18 +8,16 @@ using Serilog.Extensions.Logging;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.SystemConsole.Themes;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace CG.Serilog
 {
     /// <summary>
     /// This class contains extension methods related to the <see cref="IServiceCollection"/>
-    /// types.
+    /// types, for registering types related to serilog.
     /// </summary>
-    public static partial class ServiceCollectionExtensions
+    public static partial class SerilogServiceCollectionExtensions
     {
         // *******************************************************************
         // Public methods.
