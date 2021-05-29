@@ -18,6 +18,7 @@ Platforms supported:
     <PackageIcon>packageDefaultIcon-50x50.png</PackageIcon>
     <RepositoryUrl>https://github.com/CodeGator/CG.Serilog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -29,13 +30,13 @@ Platforms supported:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CG.Configuration" Version="2021.2.3" />
-    <PackageReference Include="CG.Core" Version="2021.2.7" />
-    <PackageReference Include="CG.Logging" Version="2021.2.4" />
-    <PackageReference Include="CG.Options" Version="2021.4.10" />
+    <PackageReference Include="CG.Configuration" Version="2021.2.4" />
+    <PackageReference Include="CG.Core" Version="2021.2.9" />
+    <PackageReference Include="CG.Logging" Version="2021.2.5" />
+    <PackageReference Include="CG.Options" Version="2021.4.11" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.194">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.203">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
