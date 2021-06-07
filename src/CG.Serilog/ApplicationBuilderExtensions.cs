@@ -1,6 +1,7 @@
 ﻿using CG.Validations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace Microsoft.Extensions.Hosting
@@ -9,7 +10,7 @@ namespace Microsoft.Extensions.Hosting
     /// This class contains extension methods related to the <see cref="IApplicationBuilder"/>
     /// types, for registering types related to serilog
     /// </summary>
-    public static partial class SerilogApplicationBuilderExtensions
+    public static partial class ApplicationBuilderExtensions
     {
         // *******************************************************************
         // Public methods.
@@ -35,7 +36,9 @@ namespace Microsoft.Extensions.Hosting
             Guard.Instance().ThrowIfNull(applicationBuilder, nameof(applicationBuilder));
 
             // Use serilog.
-            Serilog.SerilogApplicationBuilderExtensions.UseSerilogRequestLogging(applicationBuilder);
+            Serilog.SerilogApplicationBuilderExtensions.UseSerilogRequestLogging(
+                applicationBuilder
+                );
 
             // Return the builder.
             return applicationBuilder;
@@ -51,8 +54,7 @@ namespace Microsoft.Extensions.Hosting
         /// for the operation.</param>
         /// <param name="hostEnvironment">The host environment to use for the 
         /// operation.</param>
-        /// <param name="configurationSection">The configuration section to use
-        /// for the operation.</param>
+        /// <param name="configuration">The configuration to use for the operation.</param>
         /// <returns>The value of the <paramref name="applicationBuilder"/>
         /// parameter, for chaining calls together.</returns>
         /// <exception cref="ArgumentException">This exception is thrown whenever
@@ -60,12 +62,13 @@ namespace Microsoft.Extensions.Hosting
         public static IApplicationBuilder UseSerilogStrategies(
             this IApplicationBuilder applicationBuilder,
             IWebHostEnvironment hostEnvironment,
-            string configurationSection
+            IConfiguration configuration
             )
         {
             // Validate the parameters before attempting to use them.
             Guard.Instance().ThrowIfNull(applicationBuilder, nameof(applicationBuilder))
-                .ThrowIfNull(hostEnvironment, nameof(hostEnvironment));
+                .ThrowIfNull(hostEnvironment, nameof(hostEnvironment))
+                .ThrowIfNull(configuration, nameof(configuration));
 
             //NOTE : nothing to do, yet.
 

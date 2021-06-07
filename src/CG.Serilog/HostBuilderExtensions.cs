@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.Hosting
     /// This class contains extension methods related to the <see cref="IHostBuilder"/>
     /// types, for registering types related to serilog
     /// </summary>
-    public static partial class SerilogHostBuilderExtensions
+    public static partial class HostBuilderExtensions
     {
         // *******************************************************************
         // Public methods.

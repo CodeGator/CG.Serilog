@@ -17,7 +17,7 @@ namespace CG.Serilog
     /// This class contains extension methods related to the <see cref="IServiceCollection"/>
     /// types, for registering types related to serilog.
     /// </summary>
-    public static partial class SerilogServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         // *******************************************************************
         // Public methods.

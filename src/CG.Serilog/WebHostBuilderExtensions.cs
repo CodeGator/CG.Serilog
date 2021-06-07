@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Hosting
     /// This class contains extension methods related to the <see cref="IWebHostBuilder"/>
     /// types, for registering types related to serilog.
     /// </summary>
-    public static partial class SerilogWebHostBuilderExtensions
+    public static partial class WebHostBuilderExtensions
     {
         // *******************************************************************
         // Public methods.
