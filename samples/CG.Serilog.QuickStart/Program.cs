@@ -10,31 +10,23 @@ namespace CG.Serilog.QuickStart
     {
         static void Main(string[] args)
         {
-            var host = Host.CreateDefaultBuilder()
-                //.AddStandardSerilog()
-                .ConfigureWebHost(webHostBuilder=> {
-                    webHostBuilder.UseStartup<Startup>();
-                    //webHostBuilder.UseStandardSerilog();
+            var host = Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>(); // < -- call our startup class ...
                 })
                 .Build();
 
-            // That's it! The host should now have a registered Serilog logger.
+            // Let's verfiy that we actually registered Serilog ...
+            var logger = host.Services.GetRequiredService<ILogger<Program>>();
+            logger.LogTrace("trace through serilog.");
+            logger.LogDebug("debug through serilog.");
+            logger.LogInformation("information through serilog.");
+            logger.LogWarning("warning through serilog.");
+            logger.LogError("error through serilog.");
+            logger.LogCritical("critical through serilog.");
 
-            host.RunDelegate(h =>
-            {
-                // Let's verfiy that we actually registered Serilog ...
-                var logger = h.Services.GetRequiredService<ILogger<Program>>();
-                logger.LogTrace("trace through serilog.");
-                logger.LogDebug("debug through serilog.");
-                logger.LogInformation("information through serilog.");
-                logger.LogWarning("warning through serilog.");
-                logger.LogError("error through serilog.");
-                logger.LogCritical("critical through serilog.");
-
-                Console.WriteLine();
-                Console.WriteLine("press any key to exit.");
-                Console.ReadKey();
-            });
+            host.Start();
         }
     }
 }

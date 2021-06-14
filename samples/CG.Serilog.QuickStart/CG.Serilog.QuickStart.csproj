@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CG.Hosting" Version="2020.5.7" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\CG.Serilog\CG.Serilog.csproj" />
   </ItemGroup>
 
