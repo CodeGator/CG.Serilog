@@ -54,21 +54,18 @@ namespace Microsoft.Extensions.Hosting
         /// for the operation.</param>
         /// <param name="hostEnvironment">The host environment to use for the 
         /// operation.</param>
-        /// <param name="configuration">The configuration to use for the operation.</param>
         /// <returns>The value of the <paramref name="applicationBuilder"/>
         /// parameter, for chaining calls together.</returns>
         /// <exception cref="ArgumentException">This exception is thrown whenever
         /// one or more of the required parameters is missing or invalid.</exception>
         public static IApplicationBuilder UseSerilogStrategies(
             this IApplicationBuilder applicationBuilder,
-            IWebHostEnvironment hostEnvironment,
-            IConfiguration configuration
+            IHostEnvironment hostEnvironment
             )
         {
             // Validate the parameters before attempting to use them.
             Guard.Instance().ThrowIfNull(applicationBuilder, nameof(applicationBuilder))
-                .ThrowIfNull(hostEnvironment, nameof(hostEnvironment))
-                .ThrowIfNull(configuration, nameof(configuration));
+                .ThrowIfNull(hostEnvironment, nameof(hostEnvironment));
 
             //NOTE : nothing to do, yet.
 

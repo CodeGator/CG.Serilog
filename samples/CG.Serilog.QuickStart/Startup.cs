@@ -23,7 +23,7 @@ namespace CG.Serilog.QuickStart
             )
         {
             services.AddLogging(
-                Configuration.GetSection("Services:Logging")
+                Configuration.GetSection("Logging")
                 );
         }
 
@@ -32,7 +32,10 @@ namespace CG.Serilog.QuickStart
             IWebHostEnvironment env
             )
         {
-            //app.UseStandardSerilog(env);
+            app.UseLogging(
+                env,
+                Configuration.GetSection("Logging")
+                );
         }
     }
 }
