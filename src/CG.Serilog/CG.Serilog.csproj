@@ -32,8 +32,8 @@ Platforms supported:
   <ItemGroup>
     <PackageReference Include="CG.Configuration" Version="2021.2.10" />
     <PackageReference Include="CG.Core" Version="2021.2.13" />
-    <PackageReference Include="CG.Logging" Version="2021.2.11" />
-    <PackageReference Include="CG.Options" Version="2021.4.13" />
+    <PackageReference Include="CG.Logging" Version="2021.2.12" />
+    <PackageReference Include="CG.Options" Version="2021.4.14" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.216">
@@ -41,7 +41,7 @@ Platforms supported:
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
-    <PackageReference Include="Serilog.Exceptions" Version="6.1.0" />
+    <PackageReference Include="Serilog.Exceptions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
