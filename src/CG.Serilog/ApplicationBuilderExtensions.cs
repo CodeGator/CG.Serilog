@@ -19,34 +19,6 @@ namespace Microsoft.Extensions.Hosting
         #region Public methods
 
         /// <summary>
-        /// This method adds standard middleware for logging requests through
-        /// the serilog library.
-        /// </summary>
-        /// <param name="applicationBuilder">The application builder to use 
-        /// for the operation.</param>
-        /// <returns>The value of the <paramref name="applicationBuilder"/>
-        /// parameter, for chaining calls together.</returns>
-        /// <exception cref="ArgumentException">This exception is thrown whenever
-        /// one or more of the required parameters is missing or invalid.</exception>
-        public static IApplicationBuilder UseStandardSerilogRequestLogging(
-            this IApplicationBuilder applicationBuilder
-            )
-        {
-            // Validate the parameters before attempting to use them.
-            Guard.Instance().ThrowIfNull(applicationBuilder, nameof(applicationBuilder));
-
-            // Use serilog.
-            Serilog.SerilogApplicationBuilderExtensions.UseSerilogRequestLogging(
-                applicationBuilder
-                );
-
-            // Return the builder.
-            return applicationBuilder;
-        }
-
-        // *******************************************************************
-
-        /// <summary>
         /// This method wires up any logic required for the standard Serilog logging
         /// environment.
         /// </summary>
@@ -58,7 +30,7 @@ namespace Microsoft.Extensions.Hosting
         /// parameter, for chaining calls together.</returns>
         /// <exception cref="ArgumentException">This exception is thrown whenever
         /// one or more of the required parameters is missing or invalid.</exception>
-        public static IApplicationBuilder UseSerilogStrategies(
+        public static IApplicationBuilder UseSerilogLoggerStrategies(
             this IApplicationBuilder applicationBuilder,
             IHostEnvironment hostEnvironment
             )
