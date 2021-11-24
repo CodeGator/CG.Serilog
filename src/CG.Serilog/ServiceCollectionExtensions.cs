@@ -35,7 +35,7 @@ namespace CG.Serilog
         /// <param name="configuration">The configuration to use for the operation.</param>
         /// <returns>The value of the <paramref name="serviceCollection"/>
         /// parameter, for chaining calls together.</returns>
-        public static IServiceCollection AddSerilogLoggerStrategies(
+        public static IServiceCollection AddSerilogStrategies(
             this IServiceCollection serviceCollection,
             IConfiguration configuration,
             ServiceLifetime serviceLifetime = ServiceLifetime.Scoped
